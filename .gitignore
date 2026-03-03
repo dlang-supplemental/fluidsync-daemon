@@ -1,0 +1,8 @@
+.dub/
+test.tmp
+*.exe
+*.obj
+*.lib
+*.pdb
+build/
+ node_modules/

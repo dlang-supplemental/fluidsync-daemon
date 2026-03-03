@@ -1,0 +1,2 @@
+* xref:index.adoc[FluidSync Overview]
+* xref:architecture.adoc[Daemon Architecture]

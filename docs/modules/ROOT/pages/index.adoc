@@ -1,0 +1,22 @@
+= FluidSync GUI Daemon
+:toc: macro
+:toc-title: Table of Contents
+
+The **FluidSync GUI Daemon** (`fluidsync-daemon`) is a specialized telemetry and orchestration service for providing operating system-wide temporal context to visual user interface applications. 
+
+Rather than allowing each application instance to blindly guess current system capacity and attempt full redraws on an arbitrary budget, `fluidsync` provides memory-mapped, zero-latency statistics to client applications, enabling them to construct dynamic rendering budgets (focusing on strict 1% lows for frametime stability).
+
+toc::[]
+
+== Core Tenets
+1. **Never Ghost**: UI applications must visually lock to their resizing constraints in real-time.
+2. **Skeleton Priority**: Detailed content scaling must dynamically defer to foundational UI geometry when the frame time budget is exceeded.
+3. **Decoupled Analytics**: Moving hardware telemetry parsing and aggregation out of the main UI thread protects the application's responsiveness.
+
+== Key Technical Features
+* **Zero-Copy Telemetry Delivery**: The daemon updates a named shared memory chunk that any client UI SDK (such as `dlangui`) can silently read without involving kernel calls or locking.
+* **Fallback IPC**: A persistent, slow-read local socket is maintained for apps or platforms that are unable to access the shared memory region (or as a fallback mechanism for debugging).
+* **System-Wide Calibration**: Because it is a unified background daemon, it gathers aggregate data on overall system load, adjusting the "Global Available UI Budget" proportionally. If a background rendering task peaks the CPU, `fluidsync` warns foreground applications to cull highly nested UI drawings immediately.
+
+== Why Not Solely Rely on DWM or OS APIs?
+Operating systems only understand hardware rendering thresholds (when a frame drops). They have zero context of a single thread's UI widget recursion. `fluidsync` links system health with specific layout telemetry (which client apps report back to the daemon) to actively predict the upper ceiling of an application's layout geometry capabilities before the next frame loop begins.

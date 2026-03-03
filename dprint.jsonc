@@ -1,0 +1,13 @@
+{
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "useTabs": false,
+    "newLineKind": "crlf",
+    "includes": ["**/*.{json,jsonc,md,adoc,d}"],
+    "excludes": [
+        "**/.dub",
+        "**/.git",
+        "**/build",
+        "node_modules"
+    ]
+}

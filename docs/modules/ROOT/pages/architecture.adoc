@@ -1,0 +1,35 @@
+= Architecture
+:toc: macro
+
+The daemon follows a single-reader, multi-writer reporting architecture intertwined with a multi-reader, single-writer telemetry distribution mechanism.
+
+toc::[]
+
+== Phase 1: Aggregation
+The daemon establishes background hooks into standard ETW (Event Tracing for Windows) and DXGI infrastructure to gather rolling statistics on:
+* CPU package utilization & thermal throttling indicators
+* Monitor refresh rate & vertical synchronization timing
+* Overall GPU present latency
+
+== Phase 2: Client Reporting
+Client applications (when closing, or during low-idle periods) submit "Structural Cost Reports" over the local socket to the daemon.
+Example payload: _"I am dlangui-cdm. Drawing `<Table>` with 300 rows cost me 12ms."_
+
+== Phase 3: Synchronized Mapped Publication
+The daemon aggregates all hardware health metrics and processes them into a small struct mapped directly onto system memory (Shared Memory).
+
+[source,c++]
+----
+// Simplified struct representing the Memory Map
+struct FluidSyncState {
+    uint32_t version_tick;
+    float current_budget_ms; // Derived from 1% frame lows
+    bool urgent_mode;        // System is bogged down
+    float ideal_layout_ms;   // Recommended layout time for 60Hz/144Hz
+}
+----
+
+Client UI threads open a handle to this memory mapped file. Before engaging in a deep recursive UI `calculateLayout()` pass, they read the memory locally (costs ~1ns).
+
+== Phase 4: Emergency Fallbacks
+If the shared memory mechanism goes offline, the applications maintain an asynchronous background polling thread that occasionally fetches this state over named pipes, keeping the event loop clean.

@@ -1,0 +1,10 @@
+{
+    "name": "fluidsync-daemon",
+    "description": "FluidSync GUI Telemetry Daemon",
+    "authors": ["devcntr"],
+    "copyright": "Copyright © 2026, devcntr",
+    "license": "MIT",
+    "targetType": "executable",
+    "sourcePaths": ["source"],
+    "importPaths": ["source"]
+}

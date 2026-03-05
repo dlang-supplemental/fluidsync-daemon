@@ -50,7 +50,7 @@ The full architectural specification and API reference are available in the loca
 == 🧠 Explanation (Background)
 For a deeper dive into the discovery process and the "Why" behind FluidSync, see the background documentation in our companion repository:
 
-* [FluidSync Discovery & Background](file:///Z:/code/github.com/dev-centr/dlangui/FLUIDSYNC_BACKGROUND.adoc)
+* [FluidSync Discovery & Background](file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_BACKGROUND.adoc)
 
 == 🤝 Contributing
 We use `pnpm` for documentation tooling and `dub` for the D codebase.

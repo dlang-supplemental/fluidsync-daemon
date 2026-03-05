@@ -543,7 +543,7 @@ git branch feature/dynamic-budgeting`*
 
 *User accepted the command `git add .
 git commit -m "Initialize FluidSync GUI Daemon documentation and workspace"
-gh repo create dev-centr/fluidsync-daemon --public --source=. --remote=origin --push`*
+gh repo create dlang-supplemental/fluidsync-daemon --public --source=. --remote=origin --push`*
 
 *User accepted the command `git add FLUIDSYNC_PLAN.adoc
 git commit -m "Add highly detailed architectural roadmap for FluidSync integration and multithreaded renderer"`*
@@ -553,9 +553,9 @@ git commit -m "Add highly detailed architectural roadmap for FluidSync integrati
 I have successfully set up the foundational architecture for the **FluidSync GUI Daemon** and cloned the `dlangui` repository to prepare for the modifications.
 
 ### 1. FluidSync GUI Daemon Repository Setup
-I created a new repository at `Z:\code\github.com\dev-centr\fluidsync-daemon` and pushed it directly to the Dev-Centr GitHub profile ([dev-centr/fluidsync-daemon](https://github.com/dev-centr/fluidsync-daemon)).
+I created a new repository at `Z:\code\github.com\dlang-supplemental\fluidsync-daemon` and pushed it directly to the Dlang-Supplemental GitHub profile ([dlang-supplemental/fluidsync-daemon](https://github.com/dlang-supplemental/fluidsync-daemon)).
 This repository has been fully scaffolded with:
-*   An **Antora** doc site structure ([antora.yml](cci:7://file:///Z:/code/github.com/dev-centr/fluidsync-daemon/antora.yml:0:0-0:0) leading to `docs/modules/ROOT/pages`).
+*   An **Antora** doc site structure ([antora.yml](cci:7://file:///Z:/code/github.com/dlang-supplemental/fluidsync-daemon/antora.yml:0:0-0:0) leading to `docs/modules/ROOT/pages`).
 *   A **highly-detailed index** explaining the design philosophy of "predicting" vs "reacting" to dropped frames.
 *   An **architecture page** detailing how the daemon hooks into DXGI/ETW and uses zero-copy Shared Memory structs.
 *   Proper configuration ([.gitignore](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/.gitignore:0:0-0:0), [dprint.jsonc](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/dprint.jsonc:0:0-0:0), and [.code-workspace](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/cdm-dlang.code-workspace:0:0-0:0) tailored for D and AsciiDoc rendering).

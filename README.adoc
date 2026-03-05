@@ -4,7 +4,7 @@
 :icons: font
 
 image:https://img.shields.io/badge/Status-Architectural_Draft-blue.svg[Status]
-image:https://img.shields.io/badge/Organization-Dev--Centr-orange.svg[Dev-Centr]
+image:https://img.shields.io/badge/Organization-Dlang--Supplemental-orange.svg[Dlang-Supplemental]
 
 The **FluidSync GUI Daemon** (`fluidsync-daemon`) is a specialized telemetry and orchestration service designed to provide real-time temporal context to visual user interface applications. It acts as a system-wide "heartbeat" and budget provider, ensuring that GUI applications can maintain high-fidelity responsiveness and eliminate "ghosting" or stutter during heavy system load.
 
@@ -21,7 +21,7 @@ _Note: The project is currently in the architectural phase. Real-world implement
 1. **Clone the repository:**
 [source,powershell]
 ----
-git clone https://github.com/dev-centr/fluidsync-daemon.git
+git clone https://github.com/dlang-supplemental/fluidsync-daemon.git
 ----
 
 2. **Build the daemon (requires D compiler and `dub`):**
@@ -59,4 +59,4 @@ We use `pnpm` for documentation tooling and `dub` for the D codebase.
 * [ ] Submit a PR
 
 == ⚖️ License
-MIT Copyright © 2026 Dev-Centr
+MIT Copyright © 2026 Ryan Johnson

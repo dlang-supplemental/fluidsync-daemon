@@ -511,16 +511,16 @@ It hits all the right notes for an ambitious, cross-language infrastructure proj
 
 ### User Input
 
-Stylized as FluidSync GUI Daemon (fluidsync-daemon, etc). Make a repo in DevCntr for that daemon. Don't need to build it yet. Just put highly detailed documentation in it. Set up an antora doc site in it as well (antora.yml in base, docs in 'docs' folder), gitignore, dprint.jsonc, code-workspace. Also create a highly detailed plan in dlangui for the changes necessary there (it seems my local copy of dlangui got deleted by you during a folder move operation gone bad...shit) Z:\code\github.com\devcntr-org\dlangui . Needs cloning first. We need different branches for different feature implementations. I also think one of those branches needs to be about making the UI library multithreaded. Alright, go ahead and give this a try.
+Stylized as FluidSync GUI Daemon (fluidsync-daemon, etc). Make a repo in Dev-Centr for that daemon. Don't need to build it yet. Just put highly detailed documentation in it. Set up an antora doc site in it as well (antora.yml in base, docs in 'docs' folder), gitignore, dprint.jsonc, code-workspace. Also create a highly detailed plan in dlangui for the changes necessary there (it seems my local copy of dlangui got deleted by you during a folder move operation gone bad...shit) Z:\code\github.com\dev-centr\dlangui . Needs cloning first. We need different branches for different feature implementations. I also think one of those branches needs to be about making the UI library multithreaded. Alright, go ahead and give this a try.
 
 *Viewed [FOLDER_SCHEMA.md](file:///Z:/code/FOLDER_SCHEMA.md) *
 
-*User accepted the command `if (!(Test-Path "Z:\code\github.com\devcntr-org\dlangui")) {
-    git clone https://github.com/buggins/dlangui.git "Z:\code\github.com\devcntr-org\dlangui"
+*User accepted the command `if (!(Test-Path "Z:\code\github.com\dev-centr\dlangui")) {
+    git clone https://github.com/buggins/dlangui.git "Z:\code\github.com\dev-centr\dlangui"
 }`*
 
-*User accepted the command `git init Z:\code\github.com\devcntr-org\fluidsync-daemon
-cd Z:\code\github.com\devcntr-org\dlangui
+*User accepted the command `git init Z:\code\github.com\dev-centr\fluidsync-daemon
+cd Z:\code\github.com\dev-centr\dlangui
 git branch feature/fluidsync-integration
 git branch feature/multithreaded-renderer
 git branch feature/dynamic-budgeting`*
@@ -543,7 +543,7 @@ git branch feature/dynamic-budgeting`*
 
 *User accepted the command `git add .
 git commit -m "Initialize FluidSync GUI Daemon documentation and workspace"
-gh repo create devcntr-org/fluidsync-daemon --public --source=. --remote=origin --push`*
+gh repo create dev-centr/fluidsync-daemon --public --source=. --remote=origin --push`*
 
 *User accepted the command `git add FLUIDSYNC_PLAN.adoc
 git commit -m "Add highly detailed architectural roadmap for FluidSync integration and multithreaded renderer"`*
@@ -553,32 +553,32 @@ git commit -m "Add highly detailed architectural roadmap for FluidSync integrati
 I have successfully set up the foundational architecture for the **FluidSync GUI Daemon** and cloned the `dlangui` repository to prepare for the modifications.
 
 ### 1. FluidSync GUI Daemon Repository Setup
-I created a new repository at `Z:\code\github.com\devcntr-org\fluidsync-daemon` and pushed it directly to the DevCntr GitHub profile ([devcntr-org/fluidsync-daemon](https://github.com/devcntr-org/fluidsync-daemon)).
+I created a new repository at `Z:\code\github.com\dev-centr\fluidsync-daemon` and pushed it directly to the Dev-Centr GitHub profile ([dev-centr/fluidsync-daemon](https://github.com/dev-centr/fluidsync-daemon)).
 This repository has been fully scaffolded with:
-*   An **Antora** doc site structure ([antora.yml](cci:7://file:///Z:/code/github.com/devcntr-org/fluidsync-daemon/antora.yml:0:0-0:0) leading to `docs/modules/ROOT/pages`).
+*   An **Antora** doc site structure ([antora.yml](cci:7://file:///Z:/code/github.com/dev-centr/fluidsync-daemon/antora.yml:0:0-0:0) leading to `docs/modules/ROOT/pages`).
 *   A **highly-detailed index** explaining the design philosophy of "predicting" vs "reacting" to dropped frames.
 *   An **architecture page** detailing how the daemon hooks into DXGI/ETW and uses zero-copy Shared Memory structs.
 *   Proper configuration ([.gitignore](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/.gitignore:0:0-0:0), [dprint.jsonc](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/dprint.jsonc:0:0-0:0), and [.code-workspace](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/cdm-dlang.code-workspace:0:0-0:0) tailored for D and AsciiDoc rendering).
 
 ### 2. DlangUI Cloning & Branching Strategy
-I cloned the `dlangui` library locally into `Z:\code\github.com\devcntr-org\dlangui` and created the following three target-driven feature branches:
+I cloned the `dlangui` library locally into `Z:\code\github.com\dev-centr\dlangui` and created the following three target-driven feature branches:
 *   `feature/fluidsync-integration`: Focused exclusively on disabling OS-handled redraw smoothing (`WM_SIZING`) and establishing the memory-mapped connections.
 *   `feature/dynamic-budgeting`: Focused on creating the "Two-Pass" layout interface (`isSkeletonPass`) that culls complex recursions based on telemetry warnings.
 *   `feature/multithreaded-renderer`: The massive architectural shift branch aimed at untethering OpenGL and software rasterization from the main UI thread via a frozen Display List queue structure. 
 
 ### 3. Comprehensive DlangUI Adaptation Plan
-Finally, I created a rigorous, highly detailed strategy document located in [Z:\code\github.com\devcntr-org\dlangui\FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0). It explains exactly how `dlangui`'s `win32window.d` handler processes must be modified to synchronize with our new daemon context, as well as structurally how a background renderer thread can receive "snapshots" of the widget layer without data locks.
+Finally, I created a rigorous, highly detailed strategy document located in [Z:\code\github.com\dev-centr\dlangui\FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0). It explains exactly how `dlangui`'s `win32window.d` handler processes must be modified to synchronize with our new daemon context, as well as structurally how a background renderer thread can receive "snapshots" of the widget layer without data locks.
 
 This establishes an exact roadmap for evolving `dlangui` from a reactive, single-threaded system into a proactive, threaded framework guided by native OS telemetry! Should we start tinkering with forcing the `WM_SIZING` message in one of the branches?
 
 ### User Input
 
-The dlangui repo is cloned direct from buggins. you didn't clone mine from devcntr-org?
+The dlangui repo is cloned direct from buggins. you didn't clone mine from dev-centr?
 
-*User accepted the command `rm -r -force "Z:\code\github.com\devcntr-org\dlangui"
-gh repo fork buggins/dlangui --org devcntr-org --clone=false
-git clone https://github.com/devcntr-org/dlangui.git "Z:\code\github.com\devcntr-org\dlangui"
-cd Z:\code\github.com\devcntr-org\dlangui
+*User accepted the command `rm -r -force "Z:\code\github.com\dev-centr\dlangui"
+gh repo fork buggins/dlangui --org dev-centr --clone=false
+git clone https://github.com/dlang-supplemental/dlangui.git "Z:\code\github.com\dev-centr\dlangui"
+cd Z:\code\github.com\dev-centr\dlangui
 git branch feature/fluidsync-integration
 git branch feature/multithreaded-renderer
 git branch feature/dynamic-budgeting`*
@@ -600,33 +600,33 @@ git push origin feature/multithreaded-renderer`*
 
 ### Planner Response
 
-I have re-initialized everything directly referencing the `buggins/dlangui` repository under the `devcntr-org` namespace, and structured the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) to target actual code branches!
+I have re-initialized everything directly referencing the `buggins/dlangui` repository under the `dev-centr` namespace, and structured the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) to target actual code branches!
 
 ### Steps Completed:
-1.  **Forked and Cloned:** I deleted the botched DlangUI clone and successfully executed a `gh repo fork buggins/dlangui --org devcntr-org`, followed by cloning it into `Z:\code\github.com\devcntr-org\dlangui`.
+1.  **Forked and Cloned:** I deleted the botched DlangUI clone and successfully executed a `gh repo fork buggins/dlangui --org dev-centr`, followed by cloning it into `Z:\code\github.com\dev-centr\dlangui`.
 2.  **Architectural Branches:** Inside your `dlangui` repository, I created and pushed three specific branches to GitHub:
     *   `feature/fluidsync-integration`
     *   `feature/dynamic-budgeting`
     *   `feature/multithreaded-renderer`
-3.  **The DlangUI Master Plan:** I re-created and committed [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) in the `dlangui` root on the `main` branch. This document acts as the north star for the project, outlining:
+3.  **The DlangUI Master Plan:** I re-created and committed [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) in the `dlangui` root on the `main` branch. This document acts as the north star for the project, outlining:
     *   How to break OS stretch-resizing with `WM_SIZING` in `win32window.d`.
     *   How to introduce the `isSkeletonPass` paradigm into `Widget.layout()`.
     *   The complex shift to an off-thread OpenGL/Software Rasterizer fueled by snapshot Display Lists.
 
-Both the Daemon repository (`fluidsync-daemon`) and the Framework enhancement plan (`dlangui`) are now fully set up, documented, and pushed to `devcntr-org`. 
+Both the Daemon repository (`fluidsync-daemon`) and the Framework enhancement plan (`dlangui`) are now fully set up, documented, and pushed to `dev-centr`. 
 
 We have laid out a massive, framework-altering architectural roadmap. What would you like to build or break next?
 
 ### User Input
 
-i already had dlangui forked in devcntr. oh man, please remove dlangui-1 and try to update from devcntr/dlangui
+i already had dlangui forked in Dev-Centr. oh man, please remove dlangui-1 and try to update from dlang-supplemental/dlangui
 
-*User accepted the command `cd Z:\code\github.com\devcntr-org
-gh repo delete devcntr-org/dlangui-1 --yes
-Remove-Item -Recurse -Force "Z:\code\github.com\devcntr-org\dlangui"`*
+*User accepted the command `cd Z:\code\github.com\dev-centr
+gh repo delete dlang-supplemental/dlangui-1 --yes
+Remove-Item -Recurse -Force "Z:\code\github.com\dev-centr\dlangui"`*
 
-*User accepted the command `git clone https://github.com/devcntr-org/dlangui.git "Z:\code\github.com\devcntr-org\dlangui"
-cd Z:\code\github.com\devcntr-org\dlangui
+*User accepted the command `git clone https://github.com/dlang-supplemental/dlangui.git "Z:\code\github.com\dev-centr\dlangui"
+cd Z:\code\github.com\dev-centr\dlangui
 git branch feature/fluidsync-integration
 git branch feature/multithreaded-renderer
 git branch feature/dynamic-budgeting`*
@@ -647,12 +647,12 @@ git push origin master`*
 
 My apologies! That was poor attention to detail on my part.
 
-I have completely removed my erroneous `dlangui` clone and correctly pulled in your existing `devcntr-org/dlangui` fork from GitHub into `Z:\code\github.com\devcntr-org\dlangui`.
+I have completely removed my erroneous `dlangui` clone and correctly pulled in your existing `dlang-supplemental/dlangui` fork from GitHub into `Z:\code\github.com\dev-centr\dlangui`.
 
 I then repeated the correct setup steps against your repository:
 1. Created the three implementation branches (`feature/fluidsync-integration`, `feature/dynamic-budgeting`, `feature/multithreaded-renderer`).
 2. Pushed the new branches to your remote.
-3. Created the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) document and pushed it directly to the `master` branch.
+3. Created the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) document and pushed it directly to the `master` branch.
 
 Your fork is now fully prepped with the FluidSync integration roadmap! Everything is correctly located under your organization profile.
 
@@ -668,7 +668,7 @@ git push -u origin master`*
 
 ### Planner Response
 
-I have completely rewritten the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) document and pushed the changes to the `dlangui` repository! 
+I have completely rewritten the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) document and pushed the changes to the `dlangui` repository! 
 
 It now includes a dedicated **Discovery & Emergent Reasoning** section that perfectly traces the logical path we took during our conversation:
 
@@ -693,7 +693,7 @@ git push -u origin master`*
 
 ### Planner Response
 
-I've rewritten the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) to follow a purely pedagogical narrative structure!
+I've rewritten the [FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) to follow a purely pedagogical narrative structure!
 
 Instead of a dry bulleted list of features, the document now reads like a story of discovery that walks a reader through the very real progression of UI engineering:
 
@@ -727,10 +727,10 @@ Perfectly reasonable call! It's much better to separate the "Why" from the "How.
 
 I have split the documentation into two distinct files and pushed them to the `master` branch:
 
-1.  **[FLUIDSYNC_DISCOVERY.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_DISCOVERY.adoc:0:0-0:0)**: I moved the entire story-like pedagogical progression here. This document now serves purely as the architectural context, explaining the specific rendering bottlenecks and stringing together the reasoning for each pivot.
-2.  **[FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0)**: I reverted this document to be strictly technical. It is a no-nonsense list of the exact changes required in the codebase (`win32window.d` methods, `IUIBudgetProvider` interfaces, Thread boundaries) divided by their respective feature branches. It references the `DISCOVERY` doc for any developer confused about the overarching goals.
+1.  **[FLUIDSYNC_DISCOVERY.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_DISCOVERY.adoc:0:0-0:0)**: I moved the entire story-like pedagogical progression here. This document now serves purely as the architectural context, explaining the specific rendering bottlenecks and stringing together the reasoning for each pivot.
+2.  **[FLUIDSYNC_PLAN.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0)**: I reverted this document to be strictly technical. It is a no-nonsense list of the exact changes required in the codebase (`win32window.d` methods, `IUIBudgetProvider` interfaces, Thread boundaries) divided by their respective feature branches. It references the `DISCOVERY` doc for any developer confused about the overarching goals.
 
-Both files are successfully committed and pushed to `devcntr-org/dlangui`. The roadmap is clean and ready for implementation!
+Both files are successfully committed and pushed to `dlang-supplemental/dlangui`. The roadmap is clean and ready for implementation!
 
 *Edited relevant file*
 
@@ -738,23 +738,23 @@ Both files are successfully committed and pushed to `devcntr-org/dlangui`. The r
 
 ### User Input
 
-also make sure dlang.org repo is synced locally too. same organization devcntr-org
+also make sure dlang.org repo is synced locally too. same organization dev-centr
 
-*Listed directory [devcntr-org](file:///Z:/code/github.com/devcntr-org) *
+*Listed directory [dev-centr](file:///Z:/code/github.com/dev-centr) *
 
-*Listed directory [.forks](file:///Z:/code/github.com/devcntr-org/.forks) *
+*Listed directory [.forks](file:///Z:/code/github.com/dev-centr/.forks) *
 
-*Listed directory [dlang.org](file:///Z:/code/github.com/devcntr-org/.forks/dlang.org) *
+*Listed directory [dlang.org](file:///Z:/code/github.com/dev-centr/.forks/dlang.org) *
 
 *User accepted the command `git remote -v`*
 
 *Checked command status*
 
-*User accepted the command `gh repo view devcntr-org/dlang.org --json name,owner,url`*
+*User accepted the command `gh repo view dev-centr/dlang.org --json name,owner,url`*
 
 *Checked command status*
 
-*User accepted the command `git remote set-url origin git@github.com:devcntr-org/dlang.org.git
+*User accepted the command `git remote set-url origin git@github.com:dev-centr/dlang.org.git
 git fetch upstream
 git fetch origin
 git checkout master
@@ -765,9 +765,9 @@ git push origin master`*
 
 *Checked command status*
 
-*Viewed [FLUIDSYNC_PLAN.adoc](file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc) *
+*Viewed [FLUIDSYNC_PLAN.adoc](file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc) *
 
-*Listed directory [dlangui](file:///Z:/code/github.com/devcntr-org/dlangui) *
+*Listed directory [dlangui](file:///Z:/code/github.com/dlang-supplemental/dlangui) *
 
 *User accepted the command `git status`*
 
@@ -799,25 +799,25 @@ git push origin master`*
 
 ### Planner Response
 
-I have completed the requested sync and repository setup for the **devcntr-org** organization. Here's a summary of the work:
+I have completed the requested sync and repository setup for the **dev-centr** organization. Here's a summary of the work:
 
 ### 1. `dlang.org` Synchronization
-I identified that the `dlang.org` repository was previously linked to an older organization (`devcntr-app`). I have:
-*   Updated the local repository remote to `git@github.com:devcntr-org/dlang.org.git`.
+I identified that the `dlang.org` repository was previously linked to an older organization (`dev-centr`). I have:
+*   Updated the local repository remote to `git@github.com:dev-centr/dlang.org.git`.
 *   Fetched the latest changes from the official `upstream` (`dlang/dlang.org`).
-*   Merged `upstream/master` into the `devcntr-org` fork.
+*   Merged `upstream/master` into the `dev-centr` fork.
 *   Pushed all updates and tags to your GitHub organization.
-*   The repository is located locally at `Z:\code\github.com\devcntr-org\.forks\dlang.org`.
+*   The repository is located locally at `Z:\code\github.com\dev-centr\.forks\dlang.org`.
 
 ### 2. `dlangui` Repository Refinement
 I have finalized the structure of your `dlangui` fork to incorporate the FluidSync roadmap:
-*   **Documentation Split:** Following your manual edits, I have formally renamed [FLUIDSYNC_DISCOVERY.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_DISCOVERY.adoc:0:0-0:0) to [FLUIDSYNC_BACKGROUND.adoc](cci:7://file:///Z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_BACKGROUND.adoc:0:0-0:0) and updated the implementation plan to point to the new background context file.
-*   **Technical Plan:** The [FLUIDSYNC_PLAN.adoc](cci:7://file:///z:/code/github.com/devcntr-org/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) is now a strictly technical reference for implementation.
+*   **Documentation Split:** Following your manual edits, I have formally renamed [FLUIDSYNC_DISCOVERY.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_DISCOVERY.adoc:0:0-0:0) to [FLUIDSYNC_BACKGROUND.adoc](cci:7://file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_BACKGROUND.adoc:0:0-0:0) and updated the implementation plan to point to the new background context file.
+*   **Technical Plan:** The [FLUIDSYNC_PLAN.adoc](cci:7://file:///z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_PLAN.adoc:0:0-0:0) is now a strictly technical reference for implementation.
 *   **Branches:** The implementation-specific branches (`feature/fluidsync-integration`, `feature/dynamic-budgeting`, `feature/multithreaded-renderer`) are all present and pushed to the remote.
-*   **Location:** The repository is located at `Z:\code\github.com\devcntr-org\dlangui`.
+*   **Location:** The repository is located at `Z:\code\github.com\dev-centr\dlangui`.
 
 ### 3. `fluidsync-daemon` Initialization
-As previously established, the **FluidSync GUI Daemon** repository is live at `Z:\code\github.com\devcntr-org\fluidsync-daemon` with:
+As previously established, the **FluidSync GUI Daemon** repository is live at `Z:\code\github.com\dev-centr\fluidsync-daemon` with:
 *   A full **Antora** documentation site scaffolded in the `docs` folder.
 *   Detailed architectural specifications regarding Memory-Mapped telemetry and shared budget structs.
 *   A pre-configured workspace ([.code-workspace](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/cdm-dlang.code-workspace:0:0-0:0), [dprint.jsonc](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/dprint.jsonc:0:0-0:0), [.gitignore](cci:7://file:///z:/code/github.com/AMDphreak/cdm-dlang/.gitignore:0:0-0:0)) for D development and documentation publishing.

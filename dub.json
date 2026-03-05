@@ -1,8 +1,8 @@
 {
     "name": "fluidsync-daemon",
     "description": "FluidSync GUI Telemetry Daemon",
-    "authors": ["devcntr"],
-    "copyright": "Copyright © 2026, devcntr",
+    "authors": ["Ryan Johnson"],
+    "copyright": "Copyright © 2026, Ryan Johnson",
     "license": "MIT",
     "targetType": "executable",
     "sourcePaths": ["source"],

@@ -1,0 +1,39 @@
+== Reading Telemetry via Shared Memory
+
+FluidSync delivers its state to client applications primarily through a shared memory region. This guide explains how to safely consume that state from a UI process without introducing stalls or contention.
+
+=== Why Shared Memory?
+
+* Reads are effectively zero-cost compared to IPC calls.
+* No kernel transitions are required once the mapping is established.
+* Multiple UI processes can observe the same global state concurrently.
+
+=== Connecting to the Memory Map
+
+At application startup:
+
+* Open the named shared memory segment exposed by +fluidsync-daemon+.
+* Map the region into your address space as read-only.
+* Treat the mapped bytes as a +FluidSyncState+ struct (as defined in the Architecture documentation).
+
+If the mapping fails (for example, because the daemon is not running), fall back to the slower IPC mechanism described in the Fallback IPC guide.
+
+=== Reading the Budget in the Draw Loop
+
+Within your main UI loop:
+
+* Before starting layout or painting, read the current +FluidSyncState+ from the mapped region.
+* Use +current_budget_ms+ as the target maximum time for your most complex layout passes.
+* Use +urgent_mode+ to immediately enable "skeleton mode" rendering that avoids deeply nested widgets or heavy effects.
+
+Because the mapping is shared and read-only from the client side, these reads avoid locking and do not block the daemon.
+
+=== Handling Versioning
+
+The +version_tick+ field in the struct lets clients detect changes:
+
+* Cache the last seen +version_tick+.
+* If it changes between frames, re-evaluate your layout strategy or budget calculations.
+
+This allows your UI to adapt quickly when the daemon detects new system load conditions.
+

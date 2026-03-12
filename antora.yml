@@ -1,5 +1,0 @@
-name: fluidsync-daemon
-title: FluidSync GUI Daemon
-version: ~
-nav:
-  - modules/ROOT/nav.adoc

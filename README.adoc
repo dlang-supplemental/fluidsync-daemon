@@ -1,62 +1,88 @@
 = FluidSync GUI Daemon
-:toc: macro
-:toc-title: Table of Contents
-:icons: font
+::toc: macro
+::toc-title: What This Thing Does
+::icons: font
 
 image:https://img.shields.io/badge/Status-Architectural_Draft-blue.svg[Status]
 image:https://img.shields.io/badge/Organization-Dlang--Supplemental-orange.svg[Dlang-Supplemental]
 
-The *FluidSync GUI Daemon* (+fluidsync-daemon+) is a specialized telemetry and orchestration service designed to provide real-time temporal context to visual user interface applications. It acts as a system-wide "heartbeat" and budget provider, ensuring that GUI applications can maintain high-fidelity responsiveness and eliminate "ghosting" or stutter during heavy system load.
-
 toc::[]
 
-== 💡 The Core Problem: OS Resizing Artifacts
-When you resize a window in Windows, the Desktop Window Manager (DWM) often "stretches" the existing window backbuffer while waiting for the application to redraw. This creates a "ghosting" effect where the UI appears to lag behind the cursor.
+== What Is This?
 
-Fixing this requires intercepting +WM_SIZING+ messages for synchronous redraws. However, doing so in a single-threaded UI loop can lead to massive frame drops if the UI layout is complex. +fluidsync-daemon+ solves this by providing a high-performance, zero-latency telemetry buffer that tells the UI exactly how much time it has to draw before it must "cull" details to maintain the frame rate.
+When you resize some apps on Windows, Mac, or Linux, the window border moves fast but the stuff inside the window looks smeared, stretched, or lags. These are artifacts from the redraw process. They catch your attention and distract from the interaction.
 
-== 🚀 Quick Start (Tutorial)
-_Note: The project is currently in the architectural phase. Real-world implementation is ongoing._
+The *FluidSync GUI Daemon* (+fluidsync-daemon+) is a tiny background helper that tells apps:
 
-1. **Clone the repository:**
+* "Here is how fast your computer is right now."
+* "Here is how much time you really have to draw each frame."
+
+With that information, apps can choose to:
+
+* Draw the *simple* version of the screen while you are dragging the window.
+* Draw the *fancy* detailed version after you stop dragging.
+
+Result: the app feels solid and glued to your mouse instead of laggy and stretchy.
+
+== How It Works (Simplified)
+
+* +fluidsync-daemon+ watches the system in the background (CPU, frame time, etc.).
+* It writes a tiny summary (a few numbers) into shared memory.
+* Apps read those numbers very quickly (no heavy system calls).
+* If things look "slow" or "busy", the app switches into a cheaper drawing mode so it does not stutter.
+
+== Who Should Care?
+
+You care about this project if:
+
+* You build desktop apps (for example with +dlangui+).
+* Your app has complex layouts (big tables, many widgets, lots of text).
+* You want resizing and heavy UI actions to feel smooth even on a busy machine.
+
+If you just want to *use* the daemon, you only need the quick start section.
+If you want to *integrate* it with your UI framework, see the docs listed below.
+
+== Quick Start (Very Simple)
+
+_Note: The project is still in the architectural / early implementation phase. Things may change._
+
+1. Clone the repo:
+
 [source,powershell]
 ----
 git clone https://github.com/dlang-supplemental/fluidsync-daemon.git
+cd fluidsync-daemon
 ----
 
-2. *Build the daemon (requires D compiler and +dub+):*
+2. Build the daemon (needs a D compiler and +dub+):
+
 [source,powershell]
 ----
 dub build
 ----
 
-3. *Run the daemon:*
+3. Run the daemon:
+
 [source,powershell]
 ----
 ./fluidsync-daemon.exe
 ----
 
-== 🛠️ How-to Guides
-* *Integrating with dlangui*: Learn how to hook the +IUIBudgetProvider+ into the +dlangui+ event loop.
-* *Reading Telemetry via Shared Memory*: Optimize your application's draw loop by reading the mapped buffer.
-* *Configuring Fallback IPC*: Set up named pipes for cross-platform or restricted environments.
+At this point, the process should be running in the background and exposing its shared memory and IPC endpoints.
 
-== 📚 Technical Reference
-The full architectural specification and API reference are available in the local documentation:
+== Where Do I Read More?
 
-* link:docs/modules/ROOT/pages/architecture.adoc[Architecture Overview]
-* link:docs/modules/ROOT/pages/architecture.adoc#phase-3-synchronized-mapped-publication[Shared Memory Structure]
+For short, practical guides, see:
 
-== 🧠 Explanation (Background)
-For a deeper dive into the discovery process and the "Why" behind FluidSync, see the background documentation in our companion repository:
+* link:docs/modules/ROOT/pages/integrating-with-dlangui.adoc[Integrating with dlangui] – hook FluidSync into a +dlangui+ app.
+* link:docs/modules/ROOT/pages/reading-telemetry-shared-memory.adoc[Reading Telemetry via Shared Memory] – how to read the budget numbers.
+* link:docs/modules/ROOT/pages/configuring-fallback-ipc.adoc[Configuring Fallback IPC] – what to do when shared memory is not available.
 
-* link:file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_BACKGROUND.adoc[FluidSync Discovery & Background]
+For a deeper, story-style explanation of *why* this exists:
 
-== 🤝 Contributing
-We use +pnpm+ for documentation tooling and +dub+ for the D codebase.
-* [ ] Fork the repo
-* [ ] Create a feature branch
-* [ ] Submit a PR
+* link:docs/modules/ROOT/pages/fluidsync-background.adoc[FluidSync Discovery & Background]
 
-== ⚖️ License
+== License
+
 MIT Copyright © 2026 Ryan Johnson
+

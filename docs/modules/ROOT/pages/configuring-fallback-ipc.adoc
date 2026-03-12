@@ -1,0 +1,39 @@
+== Configuring Fallback IPC
+
+While shared memory is the primary, zero-latency delivery channel for FluidSync, some environments cannot access the memory map directly. In those cases, FluidSync provides a slower, but more flexible IPC channel (for example, named pipes or local sockets).
+
+This guide outlines how to configure and consume that fallback channel.
+
+=== When to Use Fallback IPC
+
+Use the fallback IPC path when:
+
+* The shared memory mapping fails at startup.
+* Your platform or sandbox restrictions prevent shared memory access.
+* You want an additional diagnostic or debug channel.
+
+In normal operation, clients should always prefer shared memory and treat IPC as a background refresh mechanism.
+
+=== Establishing the IPC Channel
+
+From the client application:
+
+* Connect to the named pipe or local socket exposed by +fluidsync-daemon+.
+* Configure a low-frequency polling interval (for example, tens or hundreds of milliseconds).
+* Request the latest serialized +FluidSyncState+ from the daemon on each poll.
+
+On the daemon side, the IPC endpoint should:
+
+* Serialize the same logical state that is published to shared memory.
+* Prioritize responsiveness of the shared memory writer over IPC handling.
+
+=== Using IPC as a Background Refresh
+
+To keep the main UI thread clean:
+
+* Run the IPC polling in a background thread or task.
+* Whenever a new state is received, update a local copy that the UI thread can read without blocking.
+* If both shared memory and IPC are available, prefer the shared memory snapshot and use IPC only for validation or logging.
+
+By treating IPC as a secondary path, you preserve frametime stability even on systems where shared memory access is constrained.
+

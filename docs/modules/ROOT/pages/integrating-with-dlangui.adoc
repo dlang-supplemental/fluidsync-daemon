@@ -1,0 +1,43 @@
+== Integrating FluidSync with dlangui
+
+The *FluidSync GUI Daemon* (+fluidsync-daemon+) is designed to act as an external +IUIBudgetProvider+ for UI frameworks such as +dlangui+. This guide shows how to wire the shared memory state into a typical +dlangui+ event loop so layouts can respond to changing frame-time budgets.
+
+=== High-Level Flow
+
+* The daemon exposes a small shared memory struct (see the Architecture page) that contains the current UI budget and health flags.
+* The client application opens the shared memory region once at startup and keeps a lightweight handle to it.
+* Before running an expensive layout or paint pass, the UI thread reads the struct, then decides how much detail to render.
+
+=== Mapping the Shared Memory
+
+At application startup:
+
+* Open the named shared memory region published by +fluidsync-daemon+.
+* Map it into your process as a read-only view.
+* Wrap the mapped pointer with a tiny helper that returns a snapshot of the current state.
+
+The goal is for a read of the FluidSync state to be effectively free (nanoseconds) compared to layout and painting work.
+
+=== Implementing an IUIBudgetProvider
+
+Within +dlangui+, implement an +IUIBudgetProvider+ that:
+
+* Reads the current +current_budget_ms+ and +urgent_mode+ fields from the mapped struct.
+* Exposes a simple method such as +getCurrentBudgetMs()+ to the rest of your UI code.
+* Optionally tracks a rolling average to avoid reacting to single-sample spikes.
+
+Your layout and rendering code should then:
+
+* Check the budget before starting a deep recursive layout.
+* Short-circuit or simplify expensive widget trees if the budget is low or +urgent_mode+ is set.
+
+=== Hooking into the Event Loop
+
+In a standard +dlangui+ application:
+
+* Construct the FluidSync-backed +IUIBudgetProvider+ during initialization.
+* Register it with your top-level window or layout manager.
+* Ensure all complex containers consult the provider before performing maximum-detail layout or animation passes.
+
+By centralizing this integration, the rest of your UI code can stay focused on rendering logic rather than system telemetry details.
+

@@ -1,2 +1,6 @@
 * xref:index.adoc[FluidSync Overview]
 * xref:architecture.adoc[Daemon Architecture]
+* xref:integrating-with-dlangui.adoc[Integrating with dlangui]
+* xref:reading-telemetry-shared-memory.adoc[Reading Telemetry via Shared Memory]
+* xref:configuring-fallback-ipc.adoc[Configuring Fallback IPC]
+* xref:fluidsync-background.adoc[Background & Context]

@@ -6,14 +6,14 @@
 image:https://img.shields.io/badge/Status-Architectural_Draft-blue.svg[Status]
 image:https://img.shields.io/badge/Organization-Dlang--Supplemental-orange.svg[Dlang-Supplemental]
 
-The **FluidSync GUI Daemon** (`fluidsync-daemon`) is a specialized telemetry and orchestration service designed to provide real-time temporal context to visual user interface applications. It acts as a system-wide "heartbeat" and budget provider, ensuring that GUI applications can maintain high-fidelity responsiveness and eliminate "ghosting" or stutter during heavy system load.
+The *FluidSync GUI Daemon* (+fluidsync-daemon+) is a specialized telemetry and orchestration service designed to provide real-time temporal context to visual user interface applications. It acts as a system-wide "heartbeat" and budget provider, ensuring that GUI applications can maintain high-fidelity responsiveness and eliminate "ghosting" or stutter during heavy system load.
 
 toc::[]
 
 == 💡 The Core Problem: OS Resizing Artifacts
 When you resize a window in Windows, the Desktop Window Manager (DWM) often "stretches" the existing window backbuffer while waiting for the application to redraw. This creates a "ghosting" effect where the UI appears to lag behind the cursor.
 
-Fixing this requires intercepting `WM_SIZING` messages for synchronous redraws. However, doing so in a single-threaded UI loop can lead to massive frame drops if the UI layout is complex. `fluidsync-daemon` solves this by providing a high-performance, zero-latency telemetry buffer that tells the UI exactly how much time it has to draw before it must "cull" details to maintain the frame rate.
+Fixing this requires intercepting +WM_SIZING+ messages for synchronous redraws. However, doing so in a single-threaded UI loop can lead to massive frame drops if the UI layout is complex. +fluidsync-daemon+ solves this by providing a high-performance, zero-latency telemetry buffer that tells the UI exactly how much time it has to draw before it must "cull" details to maintain the frame rate.
 
 == 🚀 Quick Start (Tutorial)
 _Note: The project is currently in the architectural phase. Real-world implementation is ongoing._
@@ -24,36 +24,36 @@ _Note: The project is currently in the architectural phase. Real-world implement
 git clone https://github.com/dlang-supplemental/fluidsync-daemon.git
 ----
 
-2. **Build the daemon (requires D compiler and `dub`):**
+2. *Build the daemon (requires D compiler and +dub+):*
 [source,powershell]
 ----
 dub build
 ----
 
-3. **Run the daemon:**
+3. *Run the daemon:*
 [source,powershell]
 ----
 ./fluidsync-daemon.exe
 ----
 
 == 🛠️ How-to Guides
-* **Integrating with dlangui**: Learn how to hook the `IUIBudgetProvider` into the `dlangui` event loop.
-* **Reading Telemetry via Shared Memory**: Optimize your application's draw loop by reading the mapped buffer.
-* **Configuring Fallback IPC**: Set up named pipes for cross-platform or restricted environments.
+* *Integrating with dlangui*: Learn how to hook the +IUIBudgetProvider+ into the +dlangui+ event loop.
+* *Reading Telemetry via Shared Memory*: Optimize your application's draw loop by reading the mapped buffer.
+* *Configuring Fallback IPC*: Set up named pipes for cross-platform or restricted environments.
 
 == 📚 Technical Reference
 The full architectural specification and API reference are available in the local documentation:
 
-* [Architecture Overview](docs/modules/ROOT/pages/architecture.adoc)
-* [Shared Memory Structure](docs/modules/ROOT/pages/architecture.adoc#phase-3-synchronized-mapped-publication)
+* link:docs/modules/ROOT/pages/architecture.adoc[Architecture Overview]
+* link:docs/modules/ROOT/pages/architecture.adoc#phase-3-synchronized-mapped-publication[Shared Memory Structure]
 
 == 🧠 Explanation (Background)
 For a deeper dive into the discovery process and the "Why" behind FluidSync, see the background documentation in our companion repository:
 
-* [FluidSync Discovery & Background](file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_BACKGROUND.adoc)
+* link:file:///Z:/code/github.com/dlang-supplemental/dlangui/FLUIDSYNC_BACKGROUND.adoc[FluidSync Discovery & Background]
 
 == 🤝 Contributing
-We use `pnpm` for documentation tooling and `dub` for the D codebase.
+We use +pnpm+ for documentation tooling and +dub+ for the D codebase.
 * [ ] Fork the repo
 * [ ] Create a feature branch
 * [ ] Submit a PR

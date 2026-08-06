@@ -1,14 +1,30 @@
+ifndef::env-github[:icons: font]
+:toc: preamble
+:toclevels: 2
+:sectanchors:
+
+ifndef::env-github[]
+image:https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Contributors,link=https://github.com/dlang-supplemental/fluidsync-daemon/graphs/contributors]
+image:https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Forks,link=https://github.com/dlang-supplemental/fluidsync-daemon/network/members]
+image:https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Stars,link=https://github.com/dlang-supplemental/fluidsync-daemon/stargazers]
+image:https://img.shields.io/github/issues/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Issues,link=https://github.com/dlang-supplemental/fluidsync-daemon/issues]
+endif::[]
+
+ifdef::env-github[]
+image:https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Contributors]
+image:https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Forks]
+image:https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Stars]
+image:https://img.shields.io/github/issues/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Issues]
+endif::[]
+
 = FluidSync GUI Daemon
-::toc: macro
-::toc-title: What This Thing Does
-::icons: font
 
-image:https://img.shields.io/badge/Status-Architectural_Draft-blue.svg[Status]
-image:https://img.shields.io/badge/Organization-Dlang--Supplemental-orange.svg[Dlang-Supplemental]
+FluidSync GUI daemon with shared memory state and simulated telemetry.
 
-toc::[]
+link:https://dlang-supplemental.github.io/docs/fluidsync-daemon/[Explore the docs] ·
+link:https://github.com/dlang-supplemental/fluidsync-daemon/issues[Report Bug]
 
-== What Is This?
+== About The Project
 
 When you resize some apps on Windows, Mac, or Linux, the window border moves fast but the stuff inside the window looks smeared, stretched, or lags. These are artifacts from the redraw process. They catch your attention and distract from the interaction.
 
@@ -24,14 +40,14 @@ With that information, apps can choose to:
 
 Result: the app feels solid and glued to your mouse instead of laggy and stretchy.
 
-== How It Works (Simplified)
+=== How It Works (Simplified)
 
 * +fluidsync-daemon+ watches the system in the background (CPU, frame time, etc.).
 * It writes a tiny summary (a few numbers) into shared memory.
 * Apps read those numbers very quickly (no heavy system calls).
 * If things look "slow" or "busy", the app switches into a cheaper drawing mode so it does not stutter.
 
-== Who Should Care?
+=== Who Should Care?
 
 You care about this project if:
 
@@ -42,7 +58,7 @@ You care about this project if:
 If you just want to *use* the daemon, you only need the quick start section.
 If you want to *integrate* it with your UI framework, see the docs listed below.
 
-== Quick Start (Very Simple)
+== Installation
 
 _Note: The project is still in the architectural / early implementation phase. Things may change._
 
@@ -61,7 +77,9 @@ cd fluidsync-daemon
 dub build
 ----
 
-3. Run the daemon:
+== Usage
+
+Run the daemon:
 
 [source,powershell]
 ----
@@ -70,7 +88,7 @@ dub build
 
 At this point, the process should be running in the background and exposing its shared memory and IPC endpoints.
 
-== Where Do I Read More?
+=== Where Do I Read More?
 
 For short, practical guides, see:
 
@@ -86,3 +104,9 @@ For a deeper, story-style explanation of *why* this exists:
 
 MIT Copyright © 2026 Ryan Johnson
 
+== Contact
+
+DLang Supplemental — dlang@devcentr.org
+
+* Project: https://github.com/dlang-supplemental/fluidsync-daemon
+* Site: https://dlang-supplemental.github.io

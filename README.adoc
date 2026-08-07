@@ -3,19 +3,11 @@ ifndef::env-github[:icons: font]
 :toclevels: 2
 :sectanchors:
 
-ifndef::env-github[]
+[[readme-top]]
 image:https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Contributors,link=https://github.com/dlang-supplemental/fluidsync-daemon/graphs/contributors]
 image:https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Forks,link=https://github.com/dlang-supplemental/fluidsync-daemon/network/members]
 image:https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Stars,link=https://github.com/dlang-supplemental/fluidsync-daemon/stargazers]
 image:https://img.shields.io/github/issues/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Issues,link=https://github.com/dlang-supplemental/fluidsync-daemon/issues]
-endif::[]
-
-ifdef::env-github[]
-image:https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Contributors]
-image:https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Forks]
-image:https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Stars]
-image:https://img.shields.io/github/issues/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Issues]
-endif::[]
 
 = FluidSync GUI Daemon
 
@@ -58,6 +50,8 @@ You care about this project if:
 If you just want to *use* the daemon, you only need the quick start section.
 If you want to *integrate* it with your UI framework, see the docs listed below.
 
+link:#readme-top[back to top]
+
 == Installation
 
 _Note: The project is still in the architectural / early implementation phase. Things may change._
@@ -76,6 +70,8 @@ cd fluidsync-daemon
 ----
 dub build
 ----
+
+link:#readme-top[back to top]
 
 == Usage
 
@@ -100,9 +96,13 @@ For a deeper, story-style explanation of *why* this exists:
 
 * link:docs/modules/ROOT/pages/fluidsync-background.adoc[FluidSync Discovery & Background]
 
+link:#readme-top[back to top]
+
 == License
 
 MIT Copyright © 2026 Ryan Johnson
+
+link:#readme-top[back to top]
 
 == Contact
 
@@ -110,3 +110,5 @@ DLang Supplemental — dlang@devcentr.org
 
 * Project: https://github.com/dlang-supplemental/fluidsync-daemon
 * Site: https://dlang-supplemental.github.io
+
+link:#readme-top[back to top]

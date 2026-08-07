@@ -3,7 +3,25 @@ ifndef::env-github[:icons: font]
 :toclevels: 2
 :sectanchors:
 
-[[readme-top]]
+ifdef::env-github[]
+++++
+<a id="readme-top"></a>
+<div align="center">
+<a href="https://github.com/dlang-supplemental/fluidsync-daemon/graphs/contributors"><img src="https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/dlang-supplemental/fluidsync-daemon/network/members"><img src="https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/dlang-supplemental/fluidsync-daemon/stargazers"><img src="https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/dlang-supplemental/fluidsync-daemon/issues"><img src="https://img.shields.io/github/issues/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge" alt="Issues"></a>
+<br />
+<h3 align="center">FluidSync GUI Daemon</h3>
+<p align="center">
+FluidSync GUI daemon with shared memory state and simulated telemetry.<br />
+<a href="https://dlang-supplemental.github.io/docs/fluidsync-daemon/"><strong>Explore the docs</strong></a><br /><br /><a href="https://github.com/dlang-supplemental/fluidsync-daemon/issues">Report Bug</a>
+</p>
+</div>
+++++
+endif::[]
+
+ifndef::env-github[]
 image:https://img.shields.io/github/contributors/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Contributors,link=https://github.com/dlang-supplemental/fluidsync-daemon/graphs/contributors]
 image:https://img.shields.io/github/forks/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Forks,link=https://github.com/dlang-supplemental/fluidsync-daemon/network/members]
 image:https://img.shields.io/github/stars/dlang-supplemental/fluidsync-daemon.svg?style=for-the-badge[Stars,link=https://github.com/dlang-supplemental/fluidsync-daemon/stargazers]
@@ -15,6 +33,7 @@ FluidSync GUI daemon with shared memory state and simulated telemetry.
 
 link:https://dlang-supplemental.github.io/docs/fluidsync-daemon/[Explore the docs] ·
 link:https://github.com/dlang-supplemental/fluidsync-daemon/issues[Report Bug]
+endif::[]
 
 == About The Project
 
@@ -50,7 +69,9 @@ You care about this project if:
 If you just want to *use* the daemon, you only need the quick start section.
 If you want to *integrate* it with your UI framework, see the docs listed below.
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 
 == Installation
 
@@ -71,7 +92,9 @@ cd fluidsync-daemon
 dub build
 ----
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 
 == Usage
 
@@ -96,13 +119,17 @@ For a deeper, story-style explanation of *why* this exists:
 
 * link:docs/modules/ROOT/pages/fluidsync-background.adoc[FluidSync Discovery & Background]
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 
 == License
 
 MIT Copyright © 2026 Ryan Johnson
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 
 == Contact
 
@@ -111,4 +138,6 @@ DLang Supplemental — dlang@devcentr.org
 * Project: https://github.com/dlang-supplemental/fluidsync-daemon
 * Site: https://dlang-supplemental.github.io
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
